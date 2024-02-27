@@ -2,10 +2,11 @@ import styled from "styled-components";
 
 interface BProps {
   text: string;
+  onClick: () => void;
 }
 
-const Button = ({ text }: BProps) => {
-  return <Container>{text}</Container>;
+const Button = ({ text, onClick }: BProps) => {
+  return <Container onClick={onClick}>{text}</Container>;
 };
 
 const Container = styled.div`

@@ -6,6 +6,7 @@ import { RootState } from "../../store/store";
 const ListContainer = () => {
   const todoLists = useSelector((state: RootState) => state.todo.todoLists);
 
+  const handleOnClickDelete = () => {};
   return (
     <Container>
       {todoLists.map((el, idx) => {
@@ -13,7 +14,7 @@ const ListContainer = () => {
           <WrapperBox key={idx}>
             <TextBox>{el}</TextBox>
             <DeleteBox>
-              <Button text="delete" />
+              <Button text="delete" onClick={handleOnClickDelete} />
             </DeleteBox>
           </WrapperBox>
         );

@@ -2,7 +2,7 @@ import { configureStore, createSlice } from "@reduxjs/toolkit";
 import type { PayloadAction } from "@reduxjs/toolkit";
 // PayloadAction = action.payload 필드의 타입을 지정할 수 있게 해주는 제네릭이다.
 
-interface TodoState {
+export interface TodoState {
   todoLists: string[];
 }
 
