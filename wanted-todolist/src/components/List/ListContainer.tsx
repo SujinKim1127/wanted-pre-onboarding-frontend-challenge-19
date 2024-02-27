@@ -1,12 +1,20 @@
 import styled from "styled-components";
 import Button from "../Button/Button";
-import { useSelector } from "react-redux";
-import { RootState } from "../../store/store";
+import { useDispatch, useSelector } from "react-redux";
+import { AppDispatch, RootState, setTodoLists } from "../../store/store";
+import { useState } from "react";
 
 const ListContainer = () => {
+  const [selectIdx, setSelectIdx] = useState<number>(-1);
   const todoLists = useSelector((state: RootState) => state.todo.todoLists);
+  const dispatch = useDispatch<AppDispatch>();
 
-  const handleOnClickDelete = () => {};
+  const handleOnClickDelete = () => {
+    const updateTodoLists = [...todoLists];
+    updateTodoLists.splice(selectIdx, 1);
+    dispatch(setTodoLists(updateTodoLists));
+  };
+
   return (
     <Container>
       {todoLists.map((el, idx) => {
@@ -14,7 +22,13 @@ const ListContainer = () => {
           <WrapperBox key={idx}>
             <TextBox>{el}</TextBox>
             <DeleteBox>
-              <Button text="delete" onClick={handleOnClickDelete} />
+              <Button
+                text="delete"
+                onClick={() => {
+                  handleOnClickDelete();
+                  setSelectIdx(idx);
+                }}
+              />
             </DeleteBox>
           </WrapperBox>
         );
@@ -36,9 +50,13 @@ const Container = styled.div`
 
 const WrapperBox = styled.div`
   display: flex;
+  justify-content: center;
+  padding: 1rem;
 `;
 
-const TextBox = styled.div``;
+const TextBox = styled.div`
+  width: 10rem;
+`;
 
 const DeleteBox = styled.div``;
 
